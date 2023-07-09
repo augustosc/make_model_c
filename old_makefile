@@ -1,0 +1,19 @@
+all: app/main
+app/main: build/main.o build/add.o build/sub.o
+	gcc  -o app/main build/main.o build/add.o build/sub.o
+
+build/main.o: srcs/main.c
+	gcc -c -Isrcs/modules srcs/main.c -o build/main.o
+
+build/add.o: srcs/modules/add.c
+	gcc -c srcs/modules/add.c -o build/add.o
+
+build/sub.o: srcs/modules/sub.c
+	gcc -c srcs/modules/sub.c -o build/sub.o
+
+.PHONY: clean run
+clean:
+	-rm app/main build/main.o build/add.o build/sub.o
+
+run:
+	./app/main
